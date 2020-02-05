@@ -3,4 +3,6 @@
     if($con->connect_error){
         echo $error -> $con->connect_error;
     }
+
+    $con->set_charset('utf8'); 
 ?>

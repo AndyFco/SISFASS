@@ -88,16 +88,16 @@ h2{
 </a>
 <button class="open-button" onclick="openUsuario()">Nuevo Usuario</button>
 
-<div class="form-popup" id="usuario">
-  <form action="/action_page.php" class="form-container">
+<div class="form-popup" id="usuario" >
+  <form action="utilidades/Registrar.php" class="form-container" method="post">
     <h1>Usuario</h1>
-    <input type="text" placeholder="Codigo Empleado" name="codigo" required>
-    <input type="text" placeholder="Nombre de Usuario" name="nombre" required>
-    <input type="text" placeholder="Cedula" name="cedula" required>
-    <input type="radio" name="gender" value="Basico" checked> Basico 
-    <input type="radio" name="gender" value="Admin"> Admin
-    <input type="password" placeholder=" Password" name="pass" required>
-    <button type="submit" class="btn" formaction="main.php">Guardar</button>
+    <input type="text" placeholder="Codigo Empleado" name="codigo" id ="codigo" required>
+    <input type="text" placeholder="Nombre de Usuario" name="user" id="user" required>
+    <input type="text" placeholder="Cedula" name="cedula" id="cedula" required>
+    <input type="radio" name="basico"  id="basico" checked> Basico 
+    <input type="radio" name="gender"  id="admin"> Admin
+    <input type="password" placeholder=" Password" name="pass" id ="pass" required>
+    <input type="submit" class="btn" >Guardar</button>
     <button type="button" class="btn cancel" onclick="closeUsuario()">Cancelar</button>
   </form>
 </div>
@@ -105,7 +105,7 @@ h2{
 
 <button class="open-button" onclick="openMedico()">Nuevo Medico</button>
 <div class="form-popup" id="medico">
-  <form action="/action_page.php" class="form-container">
+  <form  class="form-container">
     <h1>Medico</h1>
     <input type="text" placeholder="Codigo Empleado" name="codigo" required>
     <input type="text" placeholder="Especialidad" name="especialidad" required>
@@ -118,7 +118,7 @@ h2{
 
 <button class="open-button" onclick="openConsulta()">Nueva Consulta</button>
 <div class="form-popup" id="cons">
-  <form action="/action_page.php" class="form-container">
+  <form  class="form-container">
     <h1>Consulta</h1>
     <input type="text" placeholder="Codigo Consulta" name="codigo_c" required>
     <input type="text" placeholder="Codigo Empleado" name="codigo_e" required>
@@ -132,7 +132,7 @@ h2{
 
 <button class="open-button" onclick="openAna()">Nuevo Analisis</button>
 <div class="form-popup" id="ana">
-  <form action="/action_page.php" class="form-container">
+  <form class="form-container">
     <h1>Analisis</h1>
     <input type="text" placeholder="Codigo Analisis" name="codigo" required>
     <input type="text" placeholder="Nombre " name="nombre" required>
