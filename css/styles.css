@@ -1,0 +1,66 @@
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url('../images/black.jpg');
+  
+}
+.formulario {
+ 
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+h1,h2,pre {
+	color: #fff;
+	text-align: center;
+  }
+  pre{font-size: 1.5rem;}
+input[type=text], input[type=textShort] {
+  width: 90%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=textShort] {
+  width: 42%;
+  
+}
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.savebtn {
+  background-color: #4CAF50;
+  color: rgb(248, 248, 248);
+  padding: 20px 20px;
+  margin:10px;
+  border: none;
+  cursor: pointer;
+  width: 46%;
+  margin-left: auto;
+ 
+}
+.cancelbtn{
+  background-color: red;
+}
+
+img{
+  position: fixed;
+  left: 100px;
+  top: 200px;
+}
+.savebtn:hover {
+  opacity: 0.8;
+}
+@media(min-widyh:768px)
+{
+  body {
+    background-color: olive;
+  }
+  .savebtn{ display: inline-block; flex: 0 0 auto;}
+  img{ visibility: hidden;}
+
+}  
