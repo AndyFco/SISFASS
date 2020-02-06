@@ -86,7 +86,7 @@ h2{
 <a href="main.php">
     <img src="images/logo.png" alt="Logo">
 </a>
-<button class="open-button" onclick="openUsuario()">Nuevo Usuario</button>
+<button class="open-button" onclick="openUsuario(),closeAna(),closeMedico(),closeConsulta() ">Nuevo Usuario</button>
 
 <div class="form-popup" id="usuario" >
   <form action="utilidades/Registrar.php" class="form-container" method="post">
@@ -94,52 +94,52 @@ h2{
     <input type="text" placeholder="Codigo Empleado" name="codigo" id ="codigo" required>
     <input type="text" placeholder="Nombre de Usuario" name="user" id="user" required>
     <input type="text" placeholder="Cedula" name="cedula" id="cedula" required>
-    <input type="radio" name="basico"  id="basico" checked> Basico 
-    <input type="radio" name="gender"  id="admin"> Admin
+    <input type="radio" name="tipo"  value="basico" checked> Basico 
+    <input type="radio" name="tipo"  value="admin"> Admin
     <input type="password" placeholder=" Password" name="pass" id ="pass" required>
-    <input type="submit" class="btn" >Guardar</button>
-    <button type="button" class="btn cancel" onclick="closeUsuario()">Cancelar</button>
+    <button type="submit" class="btn" >Guardar</button>
+    <button type="reset" class="btn cancel" onclick="closeUsuario()">Cancelar</button>
   </form>
 </div>
 <br>
 
-<button class="open-button" onclick="openMedico()">Nuevo Medico</button>
+<button class="open-button" onclick="openMedico(),closeUsuario(),closeAna(),closeConsulta()">Nuevo Medico</button>
 <div class="form-popup" id="medico">
-  <form  class="form-container">
+  <form action="utilidades/registrarMedico.php" class="form-container" method="post">
     <h1>Medico</h1>
-    <input type="text" placeholder="Codigo Empleado" name="codigo" required>
-    <input type="text" placeholder="Especialidad" name="especialidad" required>
-    <input type="text" placeholder="Cedula" name="cedula" required>
-    <button type="submit" class="btn"formaction="main.php">Guardar</button>
-    <button type="button" class="btn cancel" onclick="closeMedico()">Cancelar</button>
+    <input type="text" placeholder="Codigo Empleado" name="codigoD" id="codigoD" required>
+    <input type="text" placeholder="Nombre" name="nombreD" id="nombreD" required>
+    <input type="text" placeholder="Cedula" name="cedulaD" id="cedulaD" required>
+    <input type="text" placeholder="Especialidad" name="especialidad" id="especialidad" required>
+    <button type="submit" class="btn">Guardar</button>
+    <button type="reset" class="btn cancel" onclick="closeMedico()">Cancelar</button>
   </form>
 </div>
 <br>
 
-<button class="open-button" onclick="openConsulta()">Nueva Consulta</button>
+<button class="open-button" onclick="openConsulta(),closeUsuario(),closeAna(),closeMedico()">Nueva Consulta</button>
 <div class="form-popup" id="cons">
-  <form  class="form-container">
+  <form action="utilidades/registrarConsultas.php" class="form-container" method="post">
     <h1>Consulta</h1>
-    <input type="text" placeholder="Codigo Consulta" name="codigo_c" required>
-    <input type="text" placeholder="Codigo Empleado" name="codigo_e" required>
-    <input type="text" placeholder="Precio" name="precio" required>
-    <input type="text" placeholder="Descripcion" name="descripcion" required>
-    <button type="submit" class="btn"formaction="main.php">Guardar</button>
-    <button type="button" class="btn cancel" onclick="closeConsulta()">Cancelar</button>
+    <input type="text" placeholder="Codigo Consulta" name="codigoC"      id="codigoC" required>
+    <input type="text" placeholder="Precio"          name="precioC"      id="precioC" required>
+    <input type="text" placeholder="Descripcion"     name="descripcionC" id="descripcionC" required>
+    <button type="submit" class="btn">Guardar</button>
+    <button type="reset" class="btn cancel" onclick="closeConsulta()">Cancelar</button>
   </form>
 </div>
 <br>
 
-<button class="open-button" onclick="openAna()">Nuevo Analisis</button>
+<button class="open-button" onclick="openAna(),closeUsuario(),closeMedico(),closeConsulta()">Nuevo Analisis</button>
 <div class="form-popup" id="ana">
-  <form class="form-container">
+  <form action="utilidades/registrarAnalisis.php" class="form-container" method="post">
     <h1>Analisis</h1>
-    <input type="text" placeholder="Codigo Analisis" name="codigo" required>
-    <input type="text" placeholder="Nombre " name="nombre" required>
-    <input type="text" placeholder="Precio" name="precio" required>
-    <input type="text" placeholder="Valor Normal" name="valor" required>
-    <button type="submit" class="btn"formaction="main.php">Guardar</button>
-    <button type="button" class="btn cancel" onclick="closeAna()">Cancelar</button>
+    <input type="text" placeholder="Codigo Analisis" name="codigoA" id="codigoA"  required>
+    <input type="text" placeholder="Nombre " name="nombreA" id="nombreA" required>
+    <input type="text" placeholder="Precio" name="precioA" id="precioA" required>
+    <input type="text" placeholder="Valor Normal" name="valorN" id="valorN" required>
+    <button type="submit" class="btn">Guardar</button>
+    <button type="reset" class="btn cancel" onclick="closeAna()">Cancelar</button>
   </form>
 </div>
 
