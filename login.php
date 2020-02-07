@@ -28,13 +28,13 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/doctor.jpg');">
 			<div class="wrap-login100 p-t-190 p-b-30">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="utilidades/Autenticar.php" method="post">
 					<div class="login100-form-avatar">
 						<img src="images/logo.png" alt="AVATAR">
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Ususario requerido">
-						<input class="input100" type="text" name="username" placeholder="Usuario">
+						<input class="input100" type="text" name="user" id ="user" placeholder="Usuario">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user"></i>
@@ -42,7 +42,7 @@
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-10" data-validate = "Clave requerida">
-						<input class="input100" type="password" name="pass" placeholder="Clave">
+						<input class="input100" type="password" name="pass" id="pass" placeholder="Clave">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock"></i>
@@ -50,7 +50,7 @@
 					</div>
 
 					<div class="container-login100-form-btn p-t-10">
-                        <button class="login100-form-btn" formaction="main.html">Login</button>
+                        <button class="login100-form-btn" >Login</button>
 					</div>
 
 					<div class="text-center w-full p-t-25 p-b-230">
