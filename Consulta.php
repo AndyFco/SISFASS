@@ -95,16 +95,19 @@ img{
 
 <!--Make sure the form has the autocomplete function switched off:-->
 <form autocomplete="off" action="/action_page.php">
-    <div class="autocomplete" style="width:300px;">
-        <input id="paciente" type="text" name="paciente" placeholder="Paciente">
+      <form name="buscar_p"action="" method="GET">
+       <div  style="width:300px;">
+        <input  type="text" name="cedula" id= "cedula" placeholder="Cedula Paciente">
       </div>
+      <input type="submit"  value="buscar">
+      </form>  <hr>
   <div class="autocomplete" style="width:300px;">
     <input id="consulta" type="text" name="analisis" placeholder="Consulta">
   </div>
   <div class="autocomplete" style="width:300px;">
     <input id="doctor" type="text" name="doctor" placeholder="Doctor">
   </div>
-  <hr>
+
   <input type="submit" formaction="main.php" value="Imprimir">
 </form>
 <div id="calendar"></div>
@@ -218,8 +221,32 @@ function autocomplete(inp, arr) {
   });
 }
 
-/*An array containing all the country names in the world:*/
+
 var elementos = ["Elemento 1", "elemento 2", "algo","Pedro Navaja"]
+<?php
+$cedula= $_POST['user'];
+  try{ 
+    require_once("utilidades/conection.php");
+    $stmt = $con->prepare("SELECT nombre, apellido, cedula FROM pacientes WHERE cedula = ?");
+        $stmt->bind_param('s', $cedula);
+        $stmt->execute();
+        $stmt->bind_result($nombre_p, $apellido_p,  $cedula_p);
+        $stmt->fetch();
+        if($cedula_p)
+        {   // El paciente existe, 
+        
+
+        }else{echo "No existen registros";}
+        
+        $stmt->close();
+        $con->close();
+        
+    } catch(Exception $e) 
+    {
+        $respuesta = array( 'pass' => $e->getMessage());
+    }
+
+  ?>
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("paciente"), elementos);
 autocomplete(document.getElementById("consulta"), elementos);
