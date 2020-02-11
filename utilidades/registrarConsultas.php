@@ -7,10 +7,10 @@ $descripcion =$_POST["descripcionC"];
 
 
 $insertar= 'INSERT INTO consultas'
-."(codigoConsulta, precio, descripcion ) 
+."(codigoConsulta,  descripcion, precio ) 
 VALUES ("."'".$codigo."',"
-        ."'".$precio."'," 
-        ."'".$descripcion. "' " 
+        ."'".$descripcion."'," 
+        ."'".$precio. "' " 
         .	 ");";
 
 try{

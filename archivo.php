@@ -185,6 +185,26 @@ th, td {
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
 
+    <table class="tConsultas">
+			<tr>
+        <caption>Consultas registradas</caption>
+				<th>Descripcion</th>
+				<th>Precio</th>
+			</tr>
+      <?php 
+      try{
+          require_once("utilidades/conection.php");
+          $sql = "SELECT descripcion, precio FROM consultas";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+				<td><?php echo $ver['descripcion'] ?></td>
+        <td><?php echo $ver['precio'] ?></td>
+      </tr><?php }?>
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+
 </div>
 </div>
 <!-- Scripts hide/Show -->
@@ -193,21 +213,32 @@ th, td {
 $(".tPacientes").hide();
 $(".tAnalisis").hide();
 $(".tMedicos").hide();
+$(".tConsultas").hide();
 
 function mostrarP(){
     $(".tAnalisis").hide();
     $(".tMedicos").hide();
+    $(".tConsultas").hide();
     $(".tPacientes").show();
 }
 function mostrarA(){
     $(".tPacientes").hide();
     $(".tMedicos").hide();
+    $(".tConsultas").hide();
     $(".tAnalisis").show();
 }
 function mostrarM(){
     $(".tPacientes").hide();
     $(".tAnalisis").hide();
+    $(".tConsultas").hide();
     $(".tMedicos").show();
+}
+function mostrarC(){
+    $(".tPacientes").hide();
+    $(".tAnalisis").hide();
+    $(".tMedicos").hide();
+    $(".tConsultas").show();
+
 }
 
 </script>
