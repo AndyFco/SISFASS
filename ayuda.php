@@ -24,13 +24,8 @@
     $sql = "SELECT * FROM usuario";
     $resultado =$con->query($sql);
   }catch(\Exception $e){echo $e->getMessage();}
-
-  ?>
-  
-  <?php  
-
      while ( $usuarios =$resultado->fetch_assoc()) { ?>
-  
+
 <pre>
 <?php 
   echo $usuarios['codigoEmpleado'];
