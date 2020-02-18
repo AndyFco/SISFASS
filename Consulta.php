@@ -19,16 +19,21 @@ input {
 }
 input[type=text] {
   background-color: #f1f1f1;
-  width: 100%;
+  width: 50%;
 }
 input[type=submit] {
   background-color: DodgerBlue;
   color: #fff;
   cursor: pointer;
 }
-h1,h2,h3{
+h1,h2,h3,pre{
     color: #fff;
 }
+pre{
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+ }
 img{
   position: fixed;
   left: 0px;
@@ -39,14 +44,14 @@ table {
   width: 100%;
   color: #ffffff;
 }
+
 th, td {
   padding: 8px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
 }
 th,caption{
   padding-top: 12px;
-  padding-bottom: 12px;
   text-align: center;
   color: white;
   font-weight: bold;
@@ -60,18 +65,23 @@ th,caption{
 }
 .buscar{
   float: left;
-  width: 30%;
+  width: 50%;
 }
 .resultados{
-  width: 40%;
+  width: 30%;
   float: right;
+  border:2px solid #fff;
 }
 .tabla{
-  width: 40%;
+  width: 50%;
+  float: left;
   margin-top: 30px;
 }
 .medicos{
   margin-top: 30px;
+}
+.busqueda{
+  margin-bottom:  30px;
 }
 </style>
 
@@ -83,27 +93,32 @@ th,caption{
   <h2>Coloque los datos de la Consulta</h2>
   <div class="general">
   <div class="buscar" >
-        <form name="buscar_p" method="POST">
+      <form class="busqueda" name="buscar_p" method="POST">
         <input  type="text" name="cedula" id= "cedula" placeholder="Cedula Paciente" required>
-        <input type="submit" onclick="mostrarP()" id="buscarPaciente" value="buscar">
-  </form>  <br><br>
+        <input  type="text" name="codigoC" id= "codigoC" placeholder="Codigo de la Consulta" required>
+        <input  type="text" name="codigoM" id= "codigoM" placeholder="Codigo del Medico" required>
+        <br>
+        <input type="submit" id="buscarMedico" value="Buscar">
+      </form>   
   </div>
- 
+  <!-- tablas de apoyo -->
   <div class="resultados" >
   <table class="tConsultas">
 			<tr>
         <caption>Consultas registradas</caption>
+        <th>Codigo</th>
 				<th>Descripcion</th>
 				<th>Precio</th>
 			</tr>
       <?php 
       try{
           require_once("utilidades/conection.php");
-          $sql = "SELECT descripcion, precio FROM consultas";
+          $sql = "SELECT * FROM consultas";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
 			<tr>
+        <td><?php echo $ver['codigoConsulta'] ?></td>
 				<td><?php echo $ver['descripcion'] ?></td>
         <td><?php echo $ver['precio'] ?></td>
       </tr><?php }?>
@@ -113,17 +128,19 @@ th,caption{
     <table class="tMedicos">
 			<tr>
         <caption>Medicos registrados</caption>
-				<th>Nombre</th>
+        <th>Codigo</th>
+				<th>Nombre </th>
 				<th>Especialidad</th>
 			</tr>
       <?php 
       try{
           require_once("utilidades/conection.php");
-          $sql = "SELECT nombre, especialidad FROM medicos";
+          $sql = "SELECT * FROM medicos";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
 			<tr>
+        <td><?php echo $ver['codigoMedico'] ?></td>
 				<td><?php echo $ver['nombre'] ?></td>
         <td><?php echo $ver['especialidad'] ?></td>
       </tr><?php }?>
@@ -131,9 +148,10 @@ th,caption{
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
     </div>
     </div>
-
+<!-- busqueda de pacientes -->
 <div class="tabla">
 <?php
+$nombrep=""; 
  if(isset($_POST['cedula'])) 
 {
   try{
@@ -144,28 +162,58 @@ th,caption{
     $resultado =$con->query($sql);
     if($ver=$resultado->fetch_assoc()){  
         ?>
-          <table class="tPacientes"> 
-        <tr>
-            <caption>Datos del Paciente</caption>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Cedula</th>
-        </tr>
-        <tr>
-          <td><?php echo $ver['nombre'] ?></td>
-          <td><?php echo $ver['apellido'] ?></td>
-          <td><?php echo $ver['cedula'] ?></td>
-        </tr><?php } else{?>  
+         <pre>Datos del Paciente
+  Nombre: <?php echo $ver['nombre'] ?>   Apellido: <?php echo $ver['apellido'] ?>  Cedula: <?php echo $ver['cedula'] ?></pre>
+        
+        <?php 
+        $nombrep=$ver['nombre'];
+      } else{?>  
           <h1>Paciente no registrado</h1>
           <a id="volver" href="registrarPaciente.php">Registrar</a> <?php } ?>
       </table>
       <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
-
+      <!-- busqueda de consultas -->
+      <?php
+ if(isset($_POST['codigoC'])) 
+{
+  try{
+    $codigo= $_POST['codigoC'];       
+    require_once("utilidades/conection.php");
+    $sql = "SELECT descripcion, precio
+    FROM consultas  WHERE codigoConsulta='".$codigo."'";
+    $resultado =$con->query($sql);
+    if($ver=$resultado->fetch_assoc()){  
+        ?>
+        <pre>Datos de Consulta
+  Tipo: <?php echo $ver['descripcion'] ?>    Precio: <?php echo $ver['precio'] ?></pre>
+        <?php 
+      } else{?>  
+          <h1>Consulta no Encontrada</h1> <?php } ?>
+      </table>
+      <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
+      <!-- busqueda de medicos -->
+      <?php
+ if(isset($_POST['codigoM'])) 
+{
+  try{
+    $codigo= $_POST['codigoM'];       
+    require_once("utilidades/conection.php");
+    $sql = "SELECT nombre, especialidad
+    FROM medicos  WHERE codigoMedico='".$codigo."'";
+    $resultado =$con->query($sql);
+    if($ver=$resultado->fetch_assoc()){  
+        ?>
+         <pre>
+  Medico: <?php echo $ver['nombre'] ?>    Especialidad: <?php echo $ver['especialidad'] ?></pre>
+        <?php 
+      } else{?>  
+          <h1>Medico no Encontrado</h1> <?php } ?>
+      </table>
+      <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
 </div>
 </div>
 
 <script src="js/jquery.js"></script>
-
 
 </body>
 </html>
