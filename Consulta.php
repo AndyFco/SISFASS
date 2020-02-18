@@ -1,152 +1,171 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Consulta</title>
-<link rel="stylesheet" href="css/calendar.css" media="screen">
-
-  <style type="text/css">
-  
-  .footer{margin-top:100px;text-align:center;
-  color:#666;font:bold 14px Arial}
-  .footer a{color:#999;text-decoration:none}
-  #wrapper{padding: 50px 0 0 325px;}
-  #calendar{margin:25px auto; width: 370px;}
+<style type="text/css">
 * {
   box-sizing: border-box;
 }
-
 body {
   font: 16px Arial;  
   background-image: url('images/black.jpg');
   width:960px;margin:0 auto
 }
-
-/*the container must be positioned relative:*/
-.autocomplete {
-  position: relative;
-  display: inline-block;
-}
-
 input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
   padding: 10px;
   font-size: 16px;
 }
-
 input[type=text] {
   background-color: #f1f1f1;
   width: 100%;
 }
-
 input[type=submit] {
   background-color: DodgerBlue;
   color: #fff;
   cursor: pointer;
 }
-
-.autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
-}
-
-.autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff; 
-  border-bottom: 1px solid #d4d4d4; 
-}
-
-/*when hovering an item:*/
-.autocomplete-items div:hover {
-  background-color: #e9e9e9; 
-}
-
-/*when navigating through the items using the arrow keys:*/
-.autocomplete-active {
-  background-color: DodgerBlue !important; 
-  color: #ffffff; 
-}
-h2{
+h1,h2,h3{
     color: #fff;
 }
 img{
   position: fixed;
-  left: 100px;
-  top: 400px;
+  left: 0px;
+  top: 100px;
 }
 table {
   border-collapse: collapse;
   width: 100%;
   color: #ffffff;
 }
-
 th, td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
-
+th,caption{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+#volver{
+  text-decoration: none;
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+}
+.buscar{
+  float: left;
+  width: 30%;
+}
+.resultados{
+  width: 40%;
+  float: right;
+}
+.tabla{
+  width: 40%;
+  margin-top: 30px;
+}
+.medicos{
+  margin-top: 30px;
+}
 </style>
+
 </head>     
 <body>
     <a href="main.php">
        <img src="images/logo.png" alt="Logo">
     </a>
   <h2>Coloque los datos de la Consulta</h2>
-
-  <form name="buscar_p" >
-    <div  style="width:300px;">
+  <div class="general">
+  <div class="buscar" >
+        <form name="buscar_p" method="POST">
         <input  type="text" name="cedula" id= "cedula" placeholder="Cedula Paciente" required>
-     </div>
-      <input type="submit"  id="buscarPaciente" value="buscar">
+        <input type="submit" onclick="mostrarP()" id="buscarPaciente" value="buscar">
   </form>  <br><br>
-
-  <form autocomplete="off" >
-  <div class="autocomplete" style="width:300px;">
-    <input id="consulta" type="text" name="analisis" placeholder="Consulta">
   </div>
-  <div class="autocomplete" style="width:300px;">
-    <input id="doctor" type="text" name="doctor" placeholder="Doctor">
-  </div>
+ 
+  <div class="resultados" >
+  <table class="tConsultas">
+			<tr>
+        <caption>Consultas registradas</caption>
+				<th>Descripcion</th>
+				<th>Precio</th>
+			</tr>
+      <?php 
+      try{
+          require_once("utilidades/conection.php");
+          $sql = "SELECT descripcion, precio FROM consultas";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+				<td><?php echo $ver['descripcion'] ?></td>
+        <td><?php echo $ver['precio'] ?></td>
+      </tr><?php }?>
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+    <div class="medicos">
+    <table class="tMedicos">
+			<tr>
+        <caption>Medicos registrados</caption>
+				<th>Nombre</th>
+				<th>Especialidad</th>
+			</tr>
+      <?php 
+      try{
+          require_once("utilidades/conection.php");
+          $sql = "SELECT nombre, especialidad FROM medicos";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+				<td><?php echo $ver['nombre'] ?></td>
+        <td><?php echo $ver['especialidad'] ?></td>
+      </tr><?php }?>
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+    </div>
+    </div>
 
-  <input type="submit" formaction="main.php" value="Imprimir">
-</form> <br>
 <div class="tabla">
-  <table class="datos_paciente"> 
-   <tr>
-      <th>Nombre</th>
-      <th>Apellido</th>
-      <th>Cedula</th>
-   </tr>
-   <tr>
-     <td id="nombre">Nombre</td>
-     <td id="apellido">Apellido</td>
-     <td id="cedula">Cedula</td>
-    </tr> 
- </table>
+<?php
+ if(isset($_POST['cedula'])) 
+{
+  try{
+    $cedula= $_POST['cedula'];       
+    require_once("utilidades/conection.php");
+    $sql = "SELECT nombre, apellido, cedula
+    FROM pacientes  WHERE cedula='".$cedula."'";
+    $resultado =$con->query($sql);
+    if($ver=$resultado->fetch_assoc()){  
+        ?>
+          <table class="tPacientes"> 
+        <tr>
+            <caption>Datos del Paciente</caption>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Cedula</th>
+        </tr>
+        <tr>
+          <td><?php echo $ver['nombre'] ?></td>
+          <td><?php echo $ver['apellido'] ?></td>
+          <td><?php echo $ver['cedula'] ?></td>
+        </tr><?php } else{?>  
+          <h1>Paciente no registrado</h1>
+          <a id="volver" href="registrarPaciente.php">Registrar</a> <?php } ?>
+      </table>
+      <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
 
 </div>
-<div id="calendar"></div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="js/jquery-ui-datepicker.min.js"></script>
-<script src="js/autocomplete.js"></script>
-<script>
-	$('#calendar').datepicker({
-		inline: true,
-		firstDay: 1,
-		showOtherMonths: true,
-		dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-	});
-</script>
-<script src="js/buscar.js"></script>
+</div>
+
+<script src="js/jquery.js"></script>
+
+
 </body>
 </html>
