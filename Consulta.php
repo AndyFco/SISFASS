@@ -2,91 +2,7 @@
 <html>
 <head>
 <title>Consulta</title>
-<style type="text/css">
-* {
-  box-sizing: border-box;
-}
-body {
-  font: 16px Arial;  
-  background-image: url('images/black.jpg');
-  width:960px;margin:0 auto
-}
-input {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
-}
-input[type=text] {
-  background-color: #f1f1f1;
-  width: 50%;
-  margin:2px;
-}
-input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
-  cursor: pointer;
-  
-}
-h1,h2,h3,pre{
-    color: #fff;
-}
-pre{
-  font-size: 18px;
-  font-weight: bold;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
- }
-img{
-  position: fixed;
-  left: 0px;
-  top: 100px;
-}
-table {
-  border-collapse: collapse;
-  width: 100%;
-  color: #ffffff;
-}
-
-th, td {
-  padding: 8px;
-  text-align: center;
-  border-bottom: 1px solid gray;
-}
-th,caption{
-  padding-top: 12px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-}
-#volver{
-  text-decoration: none;
-  background-color: DodgerBlue;
-  color: #fff;
-  cursor: pointer;
-  padding: 10px;
-}
-.buscar{
-  float: left;
-  width: 50%;
-}
-.resultados{
-  width: 30%;
-  float: right;
-
-}
-.tabla{
-  width: 60%;
-  float: left;
-  margin-top: 30px;
-  border:2px solid gray;
-}
-.medicos{
-  margin-top: 30px;
-}
-.busqueda{
-  margin-bottom:  30px;
-}
-</style>
+<link rel="stylesheet" href="css/general.css" media="screen">
 
 </head>     
 <body>
@@ -165,12 +81,8 @@ $nombrep="";
     $resultado =$con->query($sql);
     if($ver=$resultado->fetch_assoc()){  
         ?>
-         <pre>Datos del Paciente
-  Nombre: <?php echo $ver['nombre'] ?>   Apellido: <?php echo $ver['apellido'] ?>  
-  Cedula: <?php echo $ver['cedula'] ?></pre>
-        
-        <?php 
-        $nombrep=$ver['nombre'];
+         <p> Paciente: <?php echo $ver['nombre'] ?> &nbsp;<?php echo $ver['apellido'] ?>  </p>
+          <?php 
       } else{?>  
           <h1>Paciente no registrado</h1>
           <a id="volver" href="registrarPaciente.php">Registrar</a> <?php } ?>
@@ -188,8 +100,7 @@ $nombrep="";
     $resultado =$con->query($sql);
     if($ver=$resultado->fetch_assoc()){  
         ?>
-        <pre>Datos de Consulta
-  Tipo: <?php echo $ver['descripcion'] ?>    Precio: <?php echo $ver['precio'] ?></pre>
+        <p>Consulta: <?php echo $ver['descripcion'] ?> &nbsp; &nbsp;   Precio: <?php echo $ver['precio'] ?></p>
         <?php 
       } else{?>  
           <h1>Consulta no Encontrada</h1> <?php } ?>
@@ -207,8 +118,7 @@ $nombrep="";
     $resultado =$con->query($sql);
     if($ver=$resultado->fetch_assoc()){  
         ?>
-         <pre>
-  Medico: <?php echo $ver['nombre'] ?>    Especialidad: <?php echo $ver['especialidad'] ?></pre>
+         <p>Medico: <?php echo $ver['nombre'] ?></p>
         <?php 
       } else{?>  
           <h1>Medico no Encontrado</h1> <?php } ?>
