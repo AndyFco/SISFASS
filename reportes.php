@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Ayuda</title>
+<title>Reportes</title>
 <link rel="stylesheet" type="text/css" href="css/general.css" />
 
 </head>
@@ -17,14 +17,15 @@
   <h1>Reportes</h1>
    <div class="general">
 <div class="botones">
-<button onclick="mostrarC()">Total Consultas</button>
-<button>Total Analisis</button>
+<button onclick="mostrarM()">Consultas Por Doctor</button>
+<button onclick="mostrarT()">Consultas del Dia</button>
+<button>Analisis del Dia</button>
 </div>
 
 <div class="tablas">
-<table class="tConsultas">
+<table class="tMedicos">
 			<tr>
-        <caption>Consultas totales del dia</caption>
+        <caption>Consultas totales De cada Medico</caption>
 				<th>Medico</th>
 				<th>Total</th>
 			</tr>
@@ -48,6 +49,32 @@
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
 
+    <table class="tConsultas">
+			<tr>
+        <caption>Consultas totales del dia</caption>
+				<th>Paciente</th>
+        <th>Consulta</th>
+        <th>Doctor</th>
+			</tr>
+      <?php 
+      try{
+          $fecha=   date("Y-m-d");
+          $total=0;
+          require_once("utilidades/conection.php");
+          $sql = "SELECT * FROM consultasdetalle
+          WHERE fecha='".$fecha."'";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+        <td><?php echo $ver['pacienteNombre']." ".$ver['pacienteApellido']  ?></td>
+        <td><?php echo $ver['consulta'] ?></td>
+        <td><?php echo $ver['doctor'] ?></td>
+        
+      </tr><?php }?>
+      
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
 
 
 
@@ -57,11 +84,17 @@
 <script>
 $(".tAnalisis").hide();
 $(".tConsultas").hide();
+$(".tMedicos").hide();
 
-function mostrarC(){
+function mostrarM(){
     $(".tAnalisis").hide();
+    $(".tConsultas").hide();
+    $(".tMedicos").show();
+}
+function mostrarT(){
+    $(".tAnalisis").hide();
+    $(".tMedicos").hide();
     $(".tConsultas").show();
-
 }
 </script>
 </body>
