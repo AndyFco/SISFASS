@@ -52,7 +52,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 				<button class="cn-button" id="cn-button" >Menu</button>
 				<div class="cn-wrapper" id="cn-wrapper">
 					<ul>
-						<li><a href="ayuda.php"><span>Ayuda</span></a></li>
+						<li><a href="reportes.php"><span>Reportes</span></a></li>
 						<li><a href="admin.php"><span>Admin</span></a></li>
 						<li><a href="registrarPaciente.php"><span>Registrar</span></a></li>
 						<li><a href="Consulta.php"><span>Consultas</span></a></li>

@@ -20,11 +20,13 @@ input {
 input[type=text] {
   background-color: #f1f1f1;
   width: 50%;
+  margin:2px;
 }
 input[type=submit] {
   background-color: DodgerBlue;
   color: #fff;
   cursor: pointer;
+  
 }
 h1,h2,h3,pre{
     color: #fff;
@@ -48,7 +50,7 @@ table {
 th, td {
   padding: 8px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid gray;
 }
 th,caption{
   padding-top: 12px;
@@ -70,12 +72,13 @@ th,caption{
 .resultados{
   width: 30%;
   float: right;
-  border:2px solid #fff;
+
 }
 .tabla{
-  width: 50%;
+  width: 60%;
   float: left;
   margin-top: 30px;
+  border:2px solid gray;
 }
 .medicos{
   margin-top: 30px;
@@ -98,7 +101,7 @@ th,caption{
         <input  type="text" name="codigoC" id= "codigoC" placeholder="Codigo de la Consulta" required>
         <input  type="text" name="codigoM" id= "codigoM" placeholder="Codigo del Medico" required>
         <br>
-        <input type="submit" id="buscarMedico" value="Buscar">
+        <input type="submit" id="buscarMedico" value="Enviar">
       </form>   
   </div>
   <!-- tablas de apoyo -->
@@ -163,7 +166,8 @@ $nombrep="";
     if($ver=$resultado->fetch_assoc()){  
         ?>
          <pre>Datos del Paciente
-  Nombre: <?php echo $ver['nombre'] ?>   Apellido: <?php echo $ver['apellido'] ?>  Cedula: <?php echo $ver['cedula'] ?></pre>
+  Nombre: <?php echo $ver['nombre'] ?>   Apellido: <?php echo $ver['apellido'] ?>  
+  Cedula: <?php echo $ver['cedula'] ?></pre>
         
         <?php 
         $nombrep=$ver['nombre'];
@@ -211,6 +215,30 @@ $nombrep="";
       </table>
       <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
 </div>
+<!-- enviar informacion a la base de datos -->
+<div class="oculto">
+<?php
+
+ if(isset($_POST['codigoM']) && isset($_POST['cedula']) && isset($_POST['codigoM'])) 
+{
+$codigoM= $_POST['codigoM']; 
+$codigoC= $_POST['codigoC']; 
+$cedula=  $_POST['cedula']; 
+$fecha=   date("Y-m-d");
+
+  try{
+      $insertar= 'INSERT INTO consultaspaciente'
+      ."( cedula, codigoMedico, codigoConsulta, fecha) 
+      VALUES ("."'".$cedula."'," 
+            ."'".$codigoM."'," 
+            ."'".$codigoC. "',"  
+            ."'".$fecha."'  "
+            .	 ");";
+            require_once("utilidades/conection.php");
+            $resultado =$con->query($insertar);
+    }catch(\Exception $e){echo $e->getMessage();}}?>
+</div>
+
 </div>
 
 <script src="js/jquery.js"></script>
