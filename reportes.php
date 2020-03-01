@@ -16,6 +16,7 @@
   
   <h1>Reportes</h1>
    <div class="general">
+   <h1 class="sisfass r">sisfass </h1>
 <div class="botones">
 <button onclick="mostrarM()">Consultas Por Doctor</button>
 <button onclick="mostrarT()">Consultas del Dia</button>

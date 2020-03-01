@@ -6,11 +6,17 @@
 
 </head>     
 <body>
+     
+			
+		
     <a href="main.php">
        <img src="images/logo.png" alt="Logo">
     </a>
-  <h2>Coloque los datos de la Consulta</h2>
-  <div class="general">
+    <div class="general">
+    <div class="titulo">
+  <h2 >Coloque los datos de la Consulta</h2>
+  </div>
+  <h1 class="sisfass">sisfass </h1>
   <div class="buscar" >
       <form class="busqueda" name="buscar_p" method="POST">
         <input  type="text" name="cedula" id= "cedula" placeholder="Cedula Paciente" required>
@@ -21,7 +27,8 @@
       </form>   
   </div>
   <!-- tablas de apoyo -->
-  <div class="resultados" >
+  <div class="resultados-2" >
+    <div class="consultas scroll">
   <table class="tConsultas">
 			<tr>
         <caption>Consultas registradas</caption>
@@ -43,8 +50,9 @@
       </tr><?php }?>
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
-    <div class="medicos">
-    <table class="tMedicos">
+    </div>
+    <div class="medicos scroll">
+    <table class="tMedicos ">
 			<tr>
         <caption>Medicos registrados</caption>
         <th>Codigo</th>
@@ -71,6 +79,7 @@
 <div class="tabla">
 <?php
 $nombrep=""; 
+$conf=true;
  if(isset($_POST['cedula'])) 
 {
   try{
@@ -83,14 +92,14 @@ $nombrep="";
         ?>
          <p> Paciente: <?php echo $ver['nombre'] ?> &nbsp;<?php echo $ver['apellido'] ?>  </p>
           <?php 
-      } else{?>  
+      } else{ $conf=false; ?>  
           <h1>Paciente no registrado</h1>
           <a id="volver" href="registrarPaciente.php">Registrar</a> <?php } ?>
       </table>
       <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
       <!-- busqueda de consultas -->
       <?php
- if(isset($_POST['codigoC'])) 
+ if(isset($_POST['codigoC'])&&($conf==true)) 
 {
   try{
     $codigo= $_POST['codigoC'];       
@@ -108,7 +117,7 @@ $nombrep="";
       <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
       <!-- busqueda de medicos -->
       <?php
- if(isset($_POST['codigoM'])) 
+ if(isset($_POST['codigoM'])&&($conf==true)) 
 {
   try{
     $codigo= $_POST['codigoM'];       
@@ -129,7 +138,7 @@ $nombrep="";
 <div class="oculto">
 <?php
 
- if(isset($_POST['codigoM']) && isset($_POST['cedula']) && isset($_POST['codigoM'])) 
+ if(isset($_POST['codigoM']) && isset($_POST['cedula']) && isset($_POST['codigoM'])&&($conf==true)) 
 {
 $codigoM= $_POST['codigoM']; 
 $codigoC= $_POST['codigoC']; 

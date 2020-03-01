@@ -8,8 +8,12 @@
     <a href="main.php">
       <img src="images/logo.png" alt="Logo">
     </a>
-<h1>Archivos </h1>
+
 <div class="general">
+<div class="titulo">
+  <h2 >Banco de datos</h2>
+  </div>
+<h1 class="sisfass r">sisfass </h1>
  <div class="botones">
   <button class="btnmostrar" onclick="mostrarP()">Pacientes</button>
   <button class="btnmostrar" onclick="mostrarA()">Analisis</button>

@@ -11,7 +11,7 @@
   </header>
   <a href="main.php">
    <img src="images/logo.png" alt="Logo"></a>
-
+<div class="general">
   <div class="formulario" >
      <form action="utilidades/registrarPaciente.php" method="POST">
         <h1>Nuevo Pacente</h1>
@@ -24,6 +24,7 @@
         <button type="submit" class="savebtn" ><b> Guardar</b></button>
         <button type="reset" class="savebtn cancelbtn" ><b>Cancelar</b></button>
      </form>
+   </div>
    </div>
 </body>
 </html>

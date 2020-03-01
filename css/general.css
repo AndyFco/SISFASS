@@ -6,15 +6,39 @@
   
   }
   body {
-    font: 16px Arial;  
+    
     background-image: url('../images/black.jpg');
   }
   .general{
     margin: auto;
-    margin-top: 50px;
+    margin-top: 25px;
     width: 1200px;
-    height: 1000px;
+ 
+  }
+  .titulo{
    
+    left: 0;
+    font-size: 18px;
+    font-weight: bold;
+    font-family:  Tahoma, sans-serif;
+  }
+  .sisfass {
+  top: 40%;
+  right: 15%;
+  position: absolute;
+	overflow: hidden;
+	width: 100%;
+	text-align: center;
+	text-transform: uppercase;
+	white-space: nowrap;
+	
+	font-style: italic;
+	font-size: 8em;
+	opacity: 0.1;
+	cursor: default;
+  }
+  .r{
+    right: 0%;
   }
   input {
     border: 1px solid transparent;
@@ -23,7 +47,12 @@
     font-size: 16px;
     margin: 2px;
   }
-  
+  .scroll{
+    height:250px;
+    width: 400px;
+    overflow-y: scroll;
+    margin-top: 10px;
+  }
   input[type=text] {
     background-color: #f1f1f1;
     width: 50%;
@@ -42,7 +71,7 @@
   }
   h1,h2,h3{
     color: #fff;
-    text-align: center;
+    
   }
   p{
     color: #fff;
@@ -61,7 +90,7 @@
   
   }
   .resultados {
-    width: 80%;
+    width: 60%;
     float: right;
   
   }
@@ -105,7 +134,7 @@
     width: 35%;
   }
 
-  .resultados{
+  .resultados-2{
     width: 30%;
     float: right;
   
@@ -113,7 +142,7 @@
   .tabla{
     width: 60%;
     float: left;
-    margin-top: 30px;
+    margin-top: 50px;
     margin: 2px;
    
   }
@@ -174,8 +203,19 @@
     padding: 13px;
     font-size: 15px;
     background-color: #2196F3;
+    border: none;
   }
-  
+  .btn{
+    color: white;
+    padding: 8px;
+    font-size: 12px;
+    border: none;
+    background-color: gray;
+  }
+  .btn:hover{
+    background-color:#ccc;
+    cursor: pointer;
+  }
   .container {
     display: block;
     position: relative;
