@@ -86,7 +86,7 @@ h2{
 <a href="main.php">
     <img src="images/logo.png" alt="Logo">
 </a>
-<button class="open-button" onclick="openUsuario(),closeAna(),closeMedico(),closeConsulta() ">Nuevo Usuario</button>
+<button class="open-button" onclick="openUsuario() ">Nuevo Usuario</button>
 
 <div class="form-popup" id="usuario" >
   <form action="utilidades/Registrar.php" class="form-container" method="post">
@@ -103,7 +103,7 @@ h2{
 </div>
 <br>
 
-<button class="open-button" onclick="openMedico(),closeUsuario(),closeAna(),closeConsulta()">Nuevo Medico</button>
+<button class="open-button" onclick="openMedico()">Nuevo Medico</button>
 <div class="form-popup" id="medico">
   <form action="utilidades/registrarMedico.php" class="form-container" method="post">
     <h1>Medico</h1>
@@ -117,7 +117,7 @@ h2{
 </div>
 <br>
 
-<button class="open-button" onclick="openConsulta(),closeUsuario(),closeAna(),closeMedico()">Nueva Consulta</button>
+<button class="open-button" onclick="openConsulta()">Nueva Consulta</button>
 <div class="form-popup" id="cons">
   <form action="utilidades/registrarConsultas.php" class="form-container" method="post">
     <h1>Consulta</h1>
@@ -130,7 +130,7 @@ h2{
 </div>
 <br>
 
-<button class="open-button" onclick="openAna(),closeUsuario(),closeMedico(),closeConsulta()">Nuevo Analisis</button>
+<button class="open-button" onclick="openAna()">Nuevo Analisis</button>
 <div class="form-popup" id="ana">
   <form action="utilidades/registrarAnalisis.php" class="form-container" method="post">
     <h1>Analisis</h1>
@@ -146,6 +146,9 @@ h2{
 <script>
 function openUsuario() {
   document.getElementById("usuario").style.display = "block";
+  document.getElementById("medico").style.display = "none";
+  document.getElementById("cons").style.display = "none";
+  document.getElementById("ana").style.display = "none";
 }
 function closeUsuario() {
   document.getElementById("usuario").style.display = "none";
@@ -153,13 +156,19 @@ function closeUsuario() {
 
 function openMedico() {
   document.getElementById("medico").style.display = "block";
+  document.getElementById("cons").style.display = "none";
+  document.getElementById("ana").style.display = "none";
+  document.getElementById("usuario").style.display = "none";
 }
 function closeMedico() {
   document.getElementById("medico").style.display = "none";
 }
 
 function openConsulta() {
+  document.getElementById("usuario").style.display = "none";
+  document.getElementById("medico").style.display = "none";
   document.getElementById("cons").style.display = "block";
+  document.getElementById("ana").style.display = "none";
 }
 function closeConsulta() {
   document.getElementById("cons").style.display = "none";
@@ -167,6 +176,9 @@ function closeConsulta() {
 
 function openAna() {
   document.getElementById("ana").style.display = "block";
+  document.getElementById("usuario").style.display = "none";
+  document.getElementById("medico").style.display = "none";
+  document.getElementById("cons").style.display = "none";
 }
 function closeAna() {
   document.getElementById("ana").style.display = "none";

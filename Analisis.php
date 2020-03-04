@@ -3,6 +3,8 @@
 <head>
 <title>Envio de Analisis</title>
 <link rel="stylesheet" href="css/general.css" media="screen">
+<script src="js/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="css/sweetalert2.min.css">
 <style>
   .btn span::before {
   
@@ -32,7 +34,7 @@
  <div class="titulo">
   <h2 >Coloque los datos del Analisis</h2>
   </div>
- <h1 class="sisfass">sisfass </h1>
+ <!-- <h1 class="sisfass">sisfass </h1> -->
 <div class="buscar">
   <form class="busqueda" name="buscar_p" method="POST">
     <input  type="text" name="cedula" id= "cedula" placeholder="Cedula Paciente" required>
@@ -44,7 +46,8 @@
 </form>
 </div>
 <div class="enviado">
-<table class="tAnalisis">
+  <div class="scroll-2">
+<table class="tAnalisis" id="tana">
 			<tr>
         <caption>Analisis registrados</caption>
 				<th>Nombre</th>
@@ -71,6 +74,7 @@
 			</tr>
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+    </div>
 </div>
 <div class="tabla">
 <!-- busqueda de pacientes -->
@@ -91,15 +95,22 @@ $conf=true;
         <hr class="barra">
          <p> Paciente: <?php echo $ver['nombre'] ?> &nbsp;<?php echo $ver['apellido'] ?></p>
          <p> Detalles: &nbsp;<span > <?php echo $_POST["detalles"];?></span></p>
+         <p> Total: &nbsp;<span > <?php echo $_POST["monto"];?></span></p><br>
+         <p>Para Enviar Otro Repetir Proceso</p>
           <?php 
       } else{$conf=false;?>  
            
-          <h1>Paciente no registrado</h1>
-          <br>
-          <a id="volver" href="registrarPaciente.php">Registrar</a> <?php } ?>
+           <h1>Paciente no registrado</h1><br>
+           <div class="botones">
+              <button onclick="mostrarR()">Registrar</button>
+          </div> <?php } ?>
       </table>
       <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
 
+</div>
+<!-- formulario de registro pacientes nuevos -->
+<div class="registro" id="registro">
+<?php include("registrarPf.php")?>
 </div>
 <!-- enviar informacion a la base de datos -->
 <div class="oculto">
@@ -139,6 +150,15 @@ $ana=explode(',', $texto);
         require_once("utilidades/conection.php");
          $resultado =$con->query($insertar_2);
       }   
+      ?>
+            <script>
+              Swal.fire({
+              icon: 'success',
+              title: 'Se envio Correctamente',
+              showConfirmButton: false,
+              timer: 1500})
+            </script>
+            <?php
     }catch(\Exception $e){echo $e->getMessage();}}?>
     
 </div>
@@ -150,6 +170,7 @@ $ana=explode(',', $texto);
 
 var lista=[];
 var total=0;
+var monto=0;
 var detalle=[];
 $(document).ready(function(){
 $(".btn").click(function(){
@@ -164,6 +185,7 @@ $(this).parents("tr").find("#detalle").each(function(){
 // calculo total de precios a enviar
 $(this).parents("tr").find("#precio").each(function(){
   total+=parseInt($(this).html());
+  monto+=parseInt($(this).html());
 });
 var uniqs = lista.filter(function(item, index, array) {
   return array.indexOf(item) === index;
@@ -172,11 +194,24 @@ var uniqs = lista.filter(function(item, index, array) {
 $("#total").text(total);
 $("#arreglo").val(uniqs);
 $("#detalles").val(detalle);
-$("#monto").text(total);
+$("#monto").val(monto);
 $(this).addClass("agregado");
 
 });
 });
+
+$(".registro").hide();
+
+function mostrarR(){
+;
+    $(".registro").show();
+}
+$.fn.rowCount = function() {
+    return $('tr', $(this).find('tbody')).length;
+};
+var rowctr = $('#tana').rowCount();
+console.log('No of Rows:'+rowctr);
+
 </script>
 
 </html>

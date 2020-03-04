@@ -3,12 +3,10 @@
 <head>
 <title>Consulta</title>
 <link rel="stylesheet" href="css/general.css" media="screen">
-
+<script src="js/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="css/sweetalert2.min.css">
 </head>     
-<body>
-     
-			
-		
+<body>		
     <a href="main.php">
        <img src="images/logo.png" alt="Logo">
     </a>
@@ -16,7 +14,7 @@
     <div class="titulo">
   <h2 >Coloque los datos de la Consulta</h2>
   </div>
-  <h1 class="sisfass">sisfass </h1>
+  <!-- <h1 class="sisfass">sisfass </h1> -->
   <div class="buscar" >
       <form class="busqueda" name="buscar_p" method="POST">
         <input  type="text" name="cedula" id= "cedula" placeholder="Cedula Paciente" required>
@@ -90,11 +88,14 @@ $conf=true;
     $resultado =$con->query($sql);
     if($ver=$resultado->fetch_assoc()){  
         ?>
+          <p>Datos Enviados:</p>
          <p> Paciente: <?php echo $ver['nombre'] ?> &nbsp;<?php echo $ver['apellido'] ?>  </p>
           <?php 
       } else{ $conf=false; ?>  
-          <h1>Paciente no registrado</h1>
-          <a id="volver" href="registrarPaciente.php">Registrar</a> <?php } ?>
+          <h1>Paciente no registrado</h1><br>
+          <div class="botones">
+            <button onclick="mostrarR()">Registrar</button>
+          </div> <?php } ?>
       </table>
       <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
       <!-- busqueda de consultas -->
@@ -127,12 +128,18 @@ $conf=true;
     $resultado =$con->query($sql);
     if($ver=$resultado->fetch_assoc()){  
         ?>
-         <p>Medico: <?php echo $ver['nombre'] ?></p>
+         <p>Medico: <?php echo $ver['nombre'] ?></p><br>
+         <p>Repetir Proceso Para Otra Consulta.</p>
         <?php 
       } else{?>  
           <h1>Medico no Encontrado</h1> <?php } ?>
       </table>
       <?php   }catch(\Exception $e){echo $e->getMessage();}}?>
+</div>
+<!-- formulario de registro pacientes nuevos -->
+<div class="registro" id="registro">
+<?php include("registrarPf.php")?>
+
 </div>
 <!-- enviar informacion a la base de datos -->
 <div class="oculto">
@@ -155,12 +162,31 @@ $fecha=   date("Y-m-d");
             .	 ");";
             require_once("utilidades/conection.php");
             $resultado =$con->query($insertar);
+            ?>
+            <script>
+              Swal.fire({
+              icon: 'success',
+              title: 'Se envio Correctamente',
+              showConfirmButton: false,
+              timer: 1500})
+            </script>
+            <?php
     }catch(\Exception $e){echo $e->getMessage();}}?>
 </div>
 
 </div>
 
 <script src="js/jquery.js"></script>
+
+<script>
+$(".registro").hide();
+
+function mostrarR(){
+;
+    $(".registro").show();
+}
+
+</script>
 
 </body>
 </html>

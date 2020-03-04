@@ -60,7 +60,8 @@ img{
   body {
     background-color: olive;
   }
-  .savebtn{ display: inline-block; flex: 0 0 auto;}
+  .savebtn{ display: inline-block; 
+    flex: 0 0 auto;}
   img{ visibility: hidden;}
 
 }  

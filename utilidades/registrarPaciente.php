@@ -1,3 +1,4 @@
+
 <?php
 include 'conection.php';
 $nombre =$_POST["nombre"];
@@ -18,11 +19,12 @@ VALUES ("."'".$nombre."',"
 try{
     require_once("conection.php");
     $resultado =$con->query($insertar);
+
     }catch(\Exception $e){echo $e->getMessage();}
 mysqli_close($con);
 ?>
 <script> 
 
-window.location.replace("../main.php"); 
+window.location.replace("../consulta.php"); 
 
 </script>

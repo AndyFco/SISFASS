@@ -53,6 +53,7 @@
     overflow-y: scroll;
     margin-top: 10px;
   }
+
   input[type=text] {
     background-color: #f1f1f1;
     width: 50%;
@@ -152,7 +153,11 @@
   .busqueda{
     margin-bottom:  30px;
   }
-
+  .scroll-2{
+    height:500px;
+    overflow-y: scroll;
+    margin-top: 10px;
+  }
 
   .botones button{
     background-color: #808080; 
@@ -164,8 +169,43 @@
     font-size: 15px;
     font-weight: bold;
     margin: .5em;
+    border: none;
     
   }
+  .savebtn {
+    background-color: #4CAF50;
+    color: rgb(248, 248, 248);
+    padding: 20px 20px;
+    margin:10px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+ 
+   
+  }
+  .savebtn:hover {
+    opacity: 0.8;
+  }
+  .cancelbtn{
+    background-color: red;
+  }
+  .registro{
+    position: fixed;
+    left: 500px;
+    top: 100px;
+    max-width: 350px;
+    padding: 10px;
+    background-color: gray;
+    
+    
+  }
+  .registro input[type=text]{
+   width: 80%;
+   margin-left: auto;
+   margin-right: auto;
+   
+  }
+
   .especial{
     position:absolute;
     bottom:5px;

@@ -36,7 +36,7 @@
       try{
           require_once("utilidades/conection.php");
           $sql = "SELECT nombre, apellido, cedula, telefono, direccion 
-                  FROM pacientes";
+                  FROM pacientes ORDER BY nombre";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
@@ -107,7 +107,8 @@
       <?php 
       try{
           require_once("utilidades/conection.php");
-          $sql = "SELECT descripcion, precio FROM consultas";
+          $sql = "SELECT descripcion, precio 
+          FROM consultas ORDER BY descripcion";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
