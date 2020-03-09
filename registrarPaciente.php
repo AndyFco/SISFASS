@@ -17,8 +17,8 @@
         <h1>Nuevo Pacente</h1>
         <input type="text"      placeholder="Nombre"    name="nombre"    id="nombre" required>
         <input type="text"      placeholder="Apellido"  name="apellido"  id="apellido" required><br>
-        <input type="textShort" placeholder="Cedula"    name="cedula"    id="cedula" required>
-        <input type="textShort" placeholder="Telefono"  name="telefono"  id="telefono" required>
+        <input type="number" placeholder="Cedula"    name="cedula"    id="cedula" required>
+        <input type="number" placeholder="Telefono"  name="telefono"  id="telefono" required>
         <input type="text"      placeholder="Direccion" name="direccion" id="direccion" required>
         <br>
         <button type="submit" class="savebtn" ><b> Guardar</b></button>
@@ -28,3 +28,4 @@
    </div>
 </body>
 </html>
+

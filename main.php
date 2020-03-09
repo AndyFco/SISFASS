@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
@@ -25,16 +26,46 @@ ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www')
 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 </script>
-<style>h1,h2, section{
+<style>
+  h1,h2, section{
 	color: #fff;
 	text-align: center;
+  }
+  p{
+	color: #fff;
+	font-weight: bold;
+	font-family:  Tahoma, sans-serif;
   }
   img{
   position: fixed;
   left: 100px;
   top: 200px;
   }
-	body {background-image: url('images/black.jpg') }
+  body{
+	background-image: url('images/black.jpg') 
+  }
+  .salir{
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+
+  }	
+ 
+  .salir a{
+	text-decoration: none;
+	background-color: gray;
+    padding: 10px 10px;
+	margin:10px;
+	border: none;
+	cursor: pointer;
+	color: #fff;
+	font-weight: bold;
+	font-family:  Tahoma, sans-serif;
+	
+  }
+  .salir a:hover {
+  opacity: 0.8;
+}
   </style>
 
 	</head>
@@ -70,6 +101,10 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 				<q>Claro que el café es un veneno lento; hace cuarenta años que lo bebo.</q><br /> VOLTAIRE
 			
 			</section>
+			<div class="salir">
+			<p> Usuario: <?php echo $_SESSION['user_session']?></p><br>
+			<a href="response.php?action=logout"> Cerrar Sesion </a>
+			</div>
 		</div><!-- /container -->
 		<script src="js/polyfills.js"></script>
 		<script src="js/demo2.js"></script>

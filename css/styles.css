@@ -15,7 +15,7 @@ h1,h2,pre {
 	text-align: center;
   }
   pre{font-size: 1.5rem;}
-input[type=text], input[type=textShort] {
+input[type=text], input[type=number] {
   width: 90%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -23,7 +23,7 @@ input[type=text], input[type=textShort] {
   border: none;
   background: #f1f1f1;
 }
-input[type=textShort] {
+input[type=number] {
   width: 42%;
   
 }
@@ -54,6 +54,9 @@ img{
 }
 .savebtn:hover {
   opacity: 0.8;
+}
+input[type=number] {
+  -moz-appearance:textfield;
 }
 @media(min-widyh:768px)
 {
