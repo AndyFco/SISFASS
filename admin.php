@@ -1,3 +1,15 @@
+<?php 
+$err = isset($_GET['error']) ? $_GET['error'] : null ;
+session_start();
+$user = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null ;
+$rol= $_SESSION['rol'];
+if($user == ''){
+	header('Location: http://localhost/SISFASS/index.php?error=2');
+}
+if($rol!="admin"){
+  header('Location: http://localhost/SISFASS/main.php?error=3');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>

@@ -1,5 +1,8 @@
 <?php
+
+$err = isset($_GET['error']) ? $_GET['error'] : null ;
 session_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,6 +13,8 @@ session_start();
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 <script type="text/javascript" src="libs/common.js"></script>
+<script src="js/sweetalert2.min.js"></script>
+<link rel="stylesheet" href="css/sweetalert2.min.css">
 
 <body>
 	<div class="container" >

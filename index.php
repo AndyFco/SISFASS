@@ -37,7 +37,19 @@ include('partials/header.php');
 		</div>
 		</div>
 	</div>
-	
+	<?php 
+	if($err==2){
+		echo "?>
+		<script>
+		  Swal.fire({
+		  icon: 'error',
+		  title: 'Debe Iniciar sesion',
+		  showConfirmButton: false,
+		  timer: 2000})
+		</script>
+		";
+	}
+	?>
 </div>
 <?php
 include('partials/footer.php')

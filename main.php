@@ -1,4 +1,12 @@
-<?php session_start();?>
+<?php 
+$err = isset($_GET['error']) ? $_GET['error'] : null ;
+session_start();
+$user = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null ;
+
+if($user == ''){
+	header('Location: http://localhost/SISFASS/index.php?error=2');
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 	<head>
@@ -15,6 +23,8 @@
 		<link rel="stylesheet" type="text/css" href="css/component2.css" />
 		<link href="hfonts/lobster/Lobster-Regular.ttf" rel="stylesheet">
 		<script src="js/modernizr-2.6.2.min.js"></script>
+		<script src="js/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="css/sweetalert2.min.css">
 
 <script type="text/javascript">
 var _gaq = _gaq || [];
@@ -105,6 +115,17 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 			<p> Usuario: <?php echo $_SESSION['user_session']?></p><br>
 			<a href="response.php?action=logout"> Cerrar Sesion </a>
 			</div>
+			<?php 
+	        if($err==3){
+				echo "?>
+				<script>
+				Swal.fire({
+				icon: 'error',
+				title: 'No tiene Autorizacion para esa seccion',
+				showConfirmButton: false,
+				timer: 2000})
+				</script>";
+			}?>
 		</div><!-- /container -->
 		<script src="js/polyfills.js"></script>
 		<script src="js/demo2.js"></script>

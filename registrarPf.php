@@ -1,4 +1,13 @@
 
+<?php 
+$err = isset($_GET['error']) ? $_GET['error'] : null ;
+session_start();
+$user = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null ;
+
+if($user == ''){
+	header('Location: http://localhost/SISFASS/index.php?error=2');
+}
+?>
   
      <form action="utilidades/registrarPaciente.php" method="POST">
         <h1>Registrar Pacente</h1>
