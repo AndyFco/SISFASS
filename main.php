@@ -52,15 +52,16 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   top: 200px;
   }
   body{
-	background-image: url('images/black.jpg') 
+	background-image: url('images/black.jpg') ;
+	overflow-y: hidden;
+	
   }
   .salir{
   position: absolute;
-  bottom: 15px;
+  bottom: 30px;
   right: 10px;
-
+  
   }	
- 
   .salir a{
 	text-decoration: none;
 	background-color: gray;
@@ -76,10 +77,12 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
   .salir a:hover {
   opacity: 0.8;
 }
+
   </style>
 
 	</head>
 	<body>
+	
 		<div class="container" >
 			<header>
 				<h1 >Sistema de Facturacion de Servicios de Salud </h1>

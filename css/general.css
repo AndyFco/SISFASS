@@ -50,7 +50,7 @@
   .scroll{
     height:250px;
     width: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-top: 10px;
   }
 
@@ -155,7 +155,7 @@
   }
   .scroll-2{
     height:500px;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-top: 10px;
   }
 

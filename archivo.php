@@ -31,7 +31,7 @@ if($user == ''){
  </div>
 <div class="resultados">
 
-		<table class="tPacientes">
+		<table class="tPacientes scroll-2">
 			<tr>
         <caption>Pacientes registrados</caption>
 				<th>Nombre</th>
@@ -60,7 +60,7 @@ if($user == ''){
     </table>    
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
 
-    <table class="tAnalisis">
+    <table class="tAnalisis scroll-2">
 			<tr>
         <caption>Analisis registrados</caption>
          	 	 	
@@ -87,7 +87,7 @@ if($user == ''){
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
 
-    <table class="tMedicos">
+    <table class="tMedicos scroll-2">
 			<tr>
         <caption>Medicos registrados</caption>
 				<th>Nombre</th>
@@ -107,7 +107,7 @@ if($user == ''){
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
 
-    <table class="tConsultas">
+    <table class="tConsultas scroll-2">
 			<tr>
         <caption>Consultas registradas</caption>
 				<th>Descripcion</th>
