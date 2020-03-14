@@ -161,14 +161,16 @@ $codigoM= $_POST['codigoM'];
 $codigoC= $_POST['codigoC']; 
 $cedula=  $_POST['cedula']; 
 $fecha=   date("Y-m-d");
+$usr=$_SESSION['codigo'];
 
   try{
       $insertar= 'INSERT INTO consultaspaciente'
-      ."( cedula, codigoMedico, codigoConsulta, fecha) 
+      ."( cedula, codigoMedico, codigoConsulta, fecha, usuario_id) 
       VALUES ("."'".$cedula."'," 
             ."'".$codigoM."'," 
             ."'".$codigoC. "',"  
-            ."'".$fecha."'  "
+            ."'".$fecha. "'," 
+            ."'".$usr."'  "
             .	 ");";
             require_once("utilidades/conection.php");
             $resultado =$con->query($insertar);

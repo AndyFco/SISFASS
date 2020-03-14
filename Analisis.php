@@ -140,7 +140,7 @@ $texto= $_POST['arreglo'];
 $cedula=  $_POST['cedula']; 
 $fecha=   date("Y-m-d");
 $ana=explode(',', $texto);
-
+$usr=$_SESSION['codigo'];
   try{
       $insertar= 'INSERT INTO solicitudana'
       ."( numeroSolicitud,	cedula,	fecha) 
@@ -155,7 +155,8 @@ $ana=explode(',', $texto);
        
       for ($i=0; $i<$l; $i++) { 
         $insertar_2= "CALL anadetalle("."'".$id."'," 
-                     ."'".$ana[$i]."' " .");";
+                     ."'".$ana[$i]."',"
+                     ."'".$usr."' " .");";
         require_once("utilidades/conection.php");
          $resultado =$con->query($insertar_2);
       }   

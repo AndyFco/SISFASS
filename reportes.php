@@ -2,7 +2,7 @@
 $err = isset($_GET['error']) ? $_GET['error'] : null ;
 session_start();
 $user = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null ;
-
+$usr=$_SESSION['codigo'];
 if($user == ''){
 	header('Location: http://localhost/SISFASS/index.php?error=2');
 }
@@ -45,9 +45,10 @@ if($user == ''){
       try{
           $fecha=   date("Y-m-d");
           $total=0;
+          $usr=$_SESSION['codigo'];
           require_once("utilidades/conection.php");
           $sql = "SELECT medico, total FROM totalmedicos
-          WHERE fecha='".$fecha."'";
+          WHERE usuario_id='".$usr."'AND  fecha='".$fecha."'";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
@@ -75,7 +76,7 @@ if($user == ''){
           $total=0;
           require_once("utilidades/conection.php");
           $sql = "SELECT * FROM consultasdetalle
-          WHERE fecha='".$fecha."'";
+           WHERE usuario='".$usr."'AND  fecha='".$fecha."'";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
@@ -105,7 +106,7 @@ if($user == ''){
           $total=0;
           require_once("utilidades/conection.php");
           $sql = "SELECT  * FROM montoana
-          WHERE fecha='".$fecha."'";
+           WHERE usuario='".$usr."'AND  fecha='".$fecha."'";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
@@ -134,7 +135,7 @@ if($user == ''){
           $total=0;
           require_once("utilidades/conection.php");
           $sql = "SELECT  Paciente,Analisis FROM detalle_ana
-          WHERE fecha='".$fecha."'";
+           WHERE usuario='".$usr."'AND  fecha='".$fecha."'";
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>

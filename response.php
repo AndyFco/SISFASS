@@ -31,7 +31,7 @@ class Employee {
 		if(isset($_POST['login-submit'])) {
 			$user_email = $_POST['username'];
 			$user_password = $_POST['password'];
-			$sql = "SELECT nombre, pass,tipo FROM usuario WHERE nombre ='$user_email'";
+			$sql = "SELECT codigoEmpleado, nombre, pass,tipo FROM usuario WHERE nombre ='$user_email'";
 			$resultset = mysqli_query($this->conn, $sql) or 
 			die("database error:". mysqli_error($this->conn));
 			$row = mysqli_fetch_assoc($resultset);
@@ -39,6 +39,7 @@ class Employee {
 				echo "1";
 				$_SESSION['user_session'] = $row['nombre'];
 				$_SESSION['rol'] = $row['tipo'];
+				$_SESSION['codigo']=$row['codigoEmpleado'];
 			} else {
 				echo "<h2 id='mensaje'>¡Datos Incorrectos !</h2>"; 
 			}

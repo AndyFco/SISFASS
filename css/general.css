@@ -118,7 +118,10 @@
     text-align: left;
     border-bottom: 1px solid gray;
   }
-
+  .btn{
+    float: left;
+    color: #fff;
+  }
   #volver{
     text-decoration: none;
     background-color: DodgerBlue;

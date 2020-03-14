@@ -15,3 +15,43 @@ select CONCAT(`p`.`nombre`," ",`p`.`apellido` )AS `Paciente`,`a`.`nombre` AS `An
 --------------------Vista Monto Analisis Realizados
 CREATE or REPLACE VIEW montoAna AS
 select `a`.`nombre` AS `Analisis`,`a`.`precio` AS `Precio`,COUNT(`a`.`nombre`) AS Cantidad,(COUNT(`a`.`nombre`)*precio) AS Monto ,`sa`.`fecha` AS `fecha` from `sisfass_db`.`solicitudana` `sa` left join `sisfass_db`.`solcitud_ana_detalle` `ad` on`ad`.`numerosolicitud` = `sa`.`numerosolicitud` left join `sisfass_db`.`analisis` `a` on`ad`.`codigoanalisis` = `a`.`codigoanAlisis` GROUP BY `a`.`nombre`
+
+----------------------ana-usuario
+CREATE OR REPLACE VIEW usuario_analisis AS SELECT
+    (COUNT(`a`.`nombre`) * `a`.`precio`) AS `Monto`,
+    `u`.`nombre` AS `Usuario`,
+    `sa`.`fecha` AS `fecha`
+FROM
+    (
+        (
+            `sisfass_db`.`solicitudana` `sa`
+        LEFT JOIN `sisfass_db`.`solcitud_ana_detalle` `ad`
+        ON
+            (
+                (
+                    `ad`.`numerosolicitud` = `sa`.`numeroSolicitud`
+                )
+            )
+        )
+    LEFT JOIN `sisfass_db`.`analisis` `a`
+    ON
+        (
+            (
+                `ad`.`codigoanalisis` = `a`.`codigoAnalisis`
+            )
+        )
+    LEFT JOIN `sisfass_db`.`usuario` `u`
+    ON
+        (
+            (
+                `ad`.`usuario_id` = `u`.`codigoEmpleado`
+            )
+        )
+    )
+GROUP BY
+    `u`.`nombre`,
+    `sa`.`fecha`
+
+
+------------------------------Usuario-consulta
+CREATE OR REPLACE VIEW usuario_consulta AS

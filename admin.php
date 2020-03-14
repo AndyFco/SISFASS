@@ -67,7 +67,39 @@ h2{
   background-color: #ddd;
   outline: none;
 }
-
+.resultados-2{
+    width: 30%;
+    float: right;
+  
+  }
+   table {
+    border-collapse: collapse;
+    width: 100%;
+    color: #ffffff;
+  }
+  th,caption{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: gray;
+    color: white;
+    font-weight: bold;
+  }
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid gray;
+  }
+.boton{
+  float: left;
+  top: 20%;
+}
+.logo{
+  position: absolute;
+  top: 400px;
+  left:700px;
+  
+}
 /* Set a style for the submit/login button */
 .form-container .btn {
   background-color: #4CAF50;
@@ -92,14 +124,14 @@ h2{
 </style>
 </head>
 <body>
-
+<div class="general">
 <h2>Administracion </h2>
 
 <a href="main.php">
-    <img src="images/logo.png" alt="Logo">
+    <img class="logo" src="images/logo.png" alt="Logo">
 </a>
+<div class="boton">
 <button class="open-button" onclick="openUsuario() ">Nuevo Usuario</button>
-
 <div class="form-popup" id="usuario" >
   <form action="utilidades/Registrar.php" class="form-container" method="post">
     <h1>Usuario</h1>
@@ -154,7 +186,68 @@ h2{
     <button type="reset" class="btn cancel" onclick="closeAna()">Cancelar</button>
   </form>
 </div>
+</div>
+<div class="resultados-2" >
+<div class="tConsultas " class="scroll-2">
+    <table >
+			<tr>
+        <caption>Analisis Por Usuario</caption>
+				<th>Usuario</th>
+        <th>Total</th>
+			</tr>
+      <?php 
+      try{
+          $total=0; 
+          $fecha=   date("Y-m-d");
+          require_once("utilidades/conection.php");
+          $sql = "SELECT * FROM  usuario_analisis 
+          WHERE fecha='".$fecha."'";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+        <td><?php echo $ver['Usuario']  ?></td>
+        <td><?php echo $ver['Monto'] ?></td>
+        <?php $total+=$ver['Monto'];?>
+      </tr><?php }?>
+      <th>Total General</th>
+			<th> <?php echo $total; ?></th>
+      
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+    </div>
+    <hr>
+    <div class="tConsultas " class="scroll-2">
+    <table >
+			<tr>
+        <caption>Consultas Por Usuario</caption>
+				<th>Usuario</th>
+        <th>Total</th>
+			</tr>
+      <?php 
+      try{
+          $total=0; 
+          $fecha=   date("Y-m-d");
+          require_once("utilidades/conection.php");
+          $sql = "SELECT * FROM  usuario_consulta 
+          WHERE fecha='".$fecha."'";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+        <td><?php echo $ver['Usuario']  ?></td>
+        <td><?php echo $ver['Monto'] ?></td>
+        <?php 
+        $total+=$ver['Monto'];?>
+      </tr><?php }?>
+      <th>Total General</th>
+				<th> <?php echo $total; ?></th>
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+    </div>
+    </div>
 
+</div>
 <script>
 function openUsuario() {
   document.getElementById("usuario").style.display = "block";
