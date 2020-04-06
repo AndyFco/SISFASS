@@ -34,10 +34,11 @@ if($user == ''){
 </div>
 
 <div class="tablas">
+  <h2><?php echo date("d-m-Y");?></h2>
 <div class="tMedicos " class="scroll-2">
 <table >
 			<tr>
-        <caption>Consultas totales De cada Medico</caption>
+        <caption>totales De cada Medico</caption>
 				<th>Medico</th>
 				<th>Total</th>
 			</tr>
@@ -65,7 +66,7 @@ if($user == ''){
     <div class="tConsultas " class="scroll-2">
     <table >
 			<tr>
-        <caption>Consultas totales del dia</caption>
+        <caption>Consultas Totales </caption>
 				<th>Paciente</th>
         <th>Consulta</th>
         <th>Doctor</th>
@@ -93,8 +94,7 @@ if($user == ''){
     <div class="tAnalisis scroll-2">
     <table >
 			<tr>
-        <caption>Analisis De Hoy&nbsp;&nbsp;  <?php echo date("d-m-Y");?></caption>
-				
+        <caption>Analisis Totales</caption>
         <th>Analisis</th>
         <th>Precio</th>
         <th>Cantidad</th>
@@ -125,7 +125,7 @@ if($user == ''){
     <div class="tAnalisisp scroll-2">
     <table >
 			<tr>
-        <caption>Analisis De Hoy&nbsp;&nbsp;  <?php echo date("d-m-Y");?></caption>
+        <caption>Analisis por Paciente </caption>
 				<th>Paciente</th>
         <th>Analisis</th>
 			</tr>

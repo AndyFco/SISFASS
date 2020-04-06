@@ -2,7 +2,7 @@
 $err = isset($_GET['error']) ? $_GET['error'] : null ;
 session_start();
 $user = isset($_SESSION['user_session']) ? $_SESSION['user_session'] : null ;
-
+$rol= $_SESSION['rol'];
 if($user == ''){
 	header('Location: http://localhost/SISFASS/index.php?error=2');
 }
@@ -24,6 +24,7 @@ if($user == ''){
 		<link href="hfonts/lobster/Lobster-Regular.ttf" rel="stylesheet">
 		<script src="js/modernizr-2.6.2.min.js"></script>
 		<script src="js/sweetalert2.min.js"></script>
+		<script src="js/jquery.js"></script>
         <link rel="stylesheet" href="css/sweetalert2.min.css">
 
 <script type="text/javascript">
@@ -96,8 +97,8 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 				<button class="cn-button" id="cn-button" >Menu</button>
 				<div class="cn-wrapper" id="cn-wrapper">
 					<ul>
+					    <li id="hid"><a href="admin.php"><span>Admin</span></a></li>
 						<li><a href="reportes.php"><span>Reportes</span></a></li>
-						<li><a href="admin.php"><span>Admin</span></a></li>
 						<li><a href="registrarPaciente.php"><span>Registrar</span></a></li>
 						<li><a href="Consulta.php"><span>Consultas</span></a></li>
 						<li><a href="Analisis.php"><span>Analisis</span></a></li>
@@ -135,4 +136,9 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 		<!-- For the demo ad only -->   
 <script src="http://tympanus.net/codrops/adpacks/demoad.js"></script>
 	</body>
+	<?php 
+	if( $rol !="admin"){?>
+		<script>$("#hid").hide();</script> <?php }
+		?>
 </html>
+
