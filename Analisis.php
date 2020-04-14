@@ -73,7 +73,7 @@ if($user == ''){
 			<tr>
         <td style="display:none;" id="seleccionado"><?php echo $ver['codigoAnalisis'] ?></td>
 				<td id="detalle"><?php echo $ver['nombre'] ?></td>
-        <td id="precio"><?php echo $ver['precio'] ?></td>
+        <td id="precio"><?php echo number_format($ver['precio']) ?></td>
         <td><button id="btnAgregar"class="btn" ><span></span></button></td>
       </tr><?php }?>
       <tr>
@@ -104,7 +104,7 @@ $conf=true;
         <hr class="barra">
          <p> Paciente: <?php echo $ver['nombre'] ?> &nbsp;<?php echo $ver['apellido'] ?></p>
          <p> Detalles: &nbsp;<span > <?php echo $_POST["detalles"];?></span></p>
-         <p> Total: &nbsp;<span > <?php echo $_POST["monto"];?></span></p><br>
+         <p> Total: &nbsp;<span > <?php echo number_format($_POST["monto"]);?></span></p><br>
          <p>Para Enviar Otro Repetir Proceso</p>
           <?php 
       } else{$conf=false;?>  

@@ -102,7 +102,7 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
 						<li><a href="registrarPaciente.php"><span>Registrar</span></a></li>
 						<li><a href="Consulta.php"><span>Consultas</span></a></li>
 						<li><a href="Analisis.php"><span>Analisis</span></a></li>
-						<li><a href="Resultado.php"><span>Resultados</span></a></li>
+						<li><a href="Resultado.php"><span>Enfermeria</span></a></li>
 						<li><a href="archivo.php"><span>Archivos</span></a></li>
 					 </ul>
 				</div>

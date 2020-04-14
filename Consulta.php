@@ -120,7 +120,7 @@ $conf=true;
     $resultado =$con->query($sql);
     if($ver=$resultado->fetch_assoc()){  
         ?>
-        <p>Consulta: <?php echo $ver['descripcion'] ?> &nbsp; &nbsp;   Precio: <?php echo $ver['precio'] ?></p>
+        <p>Consulta: <?php echo $ver['descripcion'] ?> &nbsp; &nbsp;   Precio: <?php echo number_format($ver['precio']); ?></p>
         <?php 
       } else{?>  
           <h1>Consulta no Encontrada</h1> <?php } ?>
@@ -196,6 +196,10 @@ $(".registro").hide();
 function mostrarR(){
 ;
     $(".registro").show();
+}
+function hide(){
+;
+    $(".registro").hide();
 }
 
 </script>

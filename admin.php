@@ -48,7 +48,7 @@ body {font-family: Arial, Helvetica, sans-serif;
 .form-container {
   max-width: 300px;
   padding: 10px;
-  background-color: white;
+  background-color: rgba(250, 248, 248,  0.3);
 }
 
 /* Full-width input fields */
@@ -59,7 +59,7 @@ body {font-family: Arial, Helvetica, sans-serif;
   border: none;
   background: #f1f1f1;
 }
-h2{
+h1,h2{
     color: #fff;
 }
 /* When the inputs get focus, do something */
@@ -100,6 +100,7 @@ h2{
   left:700px;
   
 }
+
 /* Set a style for the submit/login button */
 .form-container .btn {
   background-color: #4CAF50;
@@ -121,6 +122,50 @@ h2{
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
 }
+
+.container {
+
+position: relative;
+padding-left: 35px;
+margin-bottom: 12px;
+cursor: pointer;
+font-size: 16px;
+color: #fff;
+text-shadow: 2px 2px #000;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 15px;
+width: 15px;
+background-color: #eee;
+border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+background-color: #2196F3;
+}
+
 </style>
 </head>
 <body>
@@ -138,8 +183,14 @@ h2{
     <input type="text" placeholder="Codigo Empleado" name="codigo" id ="codigo" required>
     <input type="text" placeholder="Nombre de Usuario" name="user" id="user" required>
     <input type="text" placeholder="Cedula" name="cedula" id="cedula" required>
-    <input type="radio" name="tipo"  value="basico" checked> Basico 
-    <input type="radio" name="tipo"  value="admin"> Admin
+    <label class="container">basico
+    <input type="radio" checked="checked" name="tipo"  value="basico">
+    <span class="checkmark"></span>
+    </label>
+    <label class="container">Admin
+    <input type="radio" checked="checked" name="tipo"  value="admin">
+    <span class="checkmark"></span>
+    </label>
     <input type="password" placeholder=" Password" name="pass" id ="pass" required>
     <button type="submit" class="btn" >Guardar</button>
     <button type="reset" class="btn cancel" onclick="closeUsuario()">Cancelar</button>
@@ -181,14 +232,13 @@ h2{
     <input type="text" placeholder="Codigo Analisis" name="codigoA" id="codigoA"  required>
     <input type="text" placeholder="Nombre " name="nombreA" id="nombreA" required>
     <input type="text" placeholder="Precio" name="precioA" id="precioA" required>
-    <input type="text" placeholder="Valor Normal" name="valorN" id="valorN" required>
     <button type="submit" class="btn">Guardar</button>
     <button type="reset" class="btn cancel" onclick="closeAna()">Cancelar</button>
   </form>
 </div>
 </div>
 <div class="resultados-2" >
-<div class="tConsultas " class="scroll-2">
+<div class="tConsultas scroll-2">
     <table >
 			<tr>
         <caption>Analisis Por Usuario</caption>
@@ -207,17 +257,17 @@ h2{
       ?>
 			<tr>
         <td><?php echo $ver['Usuario']  ?></td>
-        <td><?php echo $ver['Monto'] ?></td>
+        <td><?php echo number_format($ver['Monto']) ?></td>
         <?php $total+=$ver['Monto'];?>
       </tr><?php }?>
       <th>Total General</th>
-			<th> <?php echo $total; ?></th>
+			<th> <?php echo number_format($total); ?></th>
       
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
     </div>
     <hr>
-    <div class="tConsultas " class="scroll-2">
+    <div class="tConsultas scroll-2">
     <table >
 			<tr>
         <caption>Consultas Por Usuario</caption>
@@ -236,17 +286,44 @@ h2{
       ?>
 			<tr>
         <td><?php echo $ver['Usuario']  ?></td>
-        <td><?php echo $ver['Monto'] ?></td>
+        <td><?php echo number_format($ver['Monto']) ?></td>
         <?php 
         $total+=$ver['Monto'];?>
       </tr><?php }?>
       <th>Total General</th>
-				<th> <?php echo $total; ?></th>
+				<th> <?php echo number_format($total); ?></th>
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+    </div>
+    <hr>
+    <div class="tConsultas scroll-2">
+    <table >
+			<tr>
+        <caption>Servicios de Enfermeria </caption>
+				<th>Usuario</th>
+        <th>Monto</th>
+			</tr>
+      <?php 
+      try{
+          $fecha=   date("Y-m-d");
+          $total=0;
+          require_once("utilidades/conection.php");
+          $sql = "SELECT  Monto, Usuario FROM usuario_enfermeria
+           WHERE  fecha='".$fecha."'";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+      <td><?php echo $ver['Usuario'] ?></td>
+        <td><?php echo number_format($ver['Monto']); ?></td>
+        <?php $total+=$ver['Monto'];?>
+      </tr><?php }?>
+      <th>Total General</th>
+      <th> <?php echo number_format($total);; ?></th>
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
     </div>
     </div>
-
 </div>
 <script>
 function openUsuario() {

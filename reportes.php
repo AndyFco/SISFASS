@@ -31,6 +31,7 @@ if($user == ''){
 <button onclick="mostrarT()">Consultas del Dia</button>
 <button onclick="mostrarA()">Analisis del Dia</button>
 <button onclick="mostrarAp()">Analisis Por Paciente</button>
+<button onclick="mostrarE()">Servicio de Enfermeria</button>
 </div>
 
 <div class="tablas">
@@ -55,11 +56,11 @@ if($user == ''){
       ?>
 			<tr>
 				<td><?php echo $ver['medico'] ?></td>
-        <td><?php echo $ver['total'] ?></td>
+        <td><?php echo number_format($ver['total']); ?></td>
         <?php $total+=$ver['total'];?>
       </tr><?php }?>
       <th>Total General</th>
-				<th> <?php echo $total; ?></th>
+				<th> <?php echo number_format($total); ?></th>
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
     </div>
@@ -114,11 +115,11 @@ if($user == ''){
         <td><?php echo $ver['Analisis'] ?></td>
         <td><?php echo $ver['Precio'] ?></td>
         <td><?php echo $ver['Cantidad'] ?></td>
-        <td><?php echo $ver['Monto'] ?></td>
+        <td><?php echo number_format($ver['Monto']); ?></td>
         <?php $total+=$ver['Monto'];?>
       </tr><?php }?>
-      <th>Total General</th>
-				<th> <?php echo $total; ?></th>
+      <th>Total General</th><th></th><th></th>
+				<th> <?php echo number_format($total); ?></th>
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
     </div>
@@ -131,6 +132,7 @@ if($user == ''){
 			</tr>
       <?php 
       try{
+        
           $fecha=   date("Y-m-d");
           $total=0;
           require_once("utilidades/conection.php");
@@ -141,10 +143,40 @@ if($user == ''){
       ?>
 			<tr>
       <td><?php echo $ver['Paciente'] ?></td>
-        <td><?php echo $ver['Analisis'] ?></td>
-       
-        
+        <td><?php echo $ver['Analisis'] ?></td> 
       </tr><?php }?>
+    </table>
+    <?php   }catch(\Exception $e){echo $e->getMessage();}?>
+    </div>
+
+    <div class="tEnf scroll-2">
+    <table >
+			<tr>
+        <caption>Servicios de Enfermeria </caption>
+				<th>Paciente</th>
+        <th>Descripcion</th>
+        <th>costo</th>
+			</tr>
+      <?php 
+      try{
+          $fecha=   date("Y-m-d");
+          $total=0;
+          require_once("utilidades/conection.php");
+          $sql = "SELECT  Paciente,descripcion, precio FROM enfermeriad
+           WHERE usuario='".$usr."'AND  fecha='".$fecha."'";
+          $resultado =$con->query($sql);
+			  	while($ver=$resultado->fetch_assoc()){ 
+      ?>
+			<tr>
+      <td><?php echo $ver['Paciente'] ?></td>
+        <td><?php echo $ver['descripcion'] ?></td>
+        <td><?php echo number_format($ver['precio']); ?></td>
+        <?php $total+=$ver['precio'];?>
+      </tr><?php }?>
+      <th>Total General</th>
+      <th></th>
+      <th> <?php echo number_format($total);; ?></th>
+     
     
     </table>
     <?php   }catch(\Exception $e){echo $e->getMessage();}?>
@@ -157,36 +189,49 @@ $(".tAnalisis").hide();
 $(".tConsultas").hide();
 $(".tMedicos").hide();
 $(".tAnalisisp").hide();
+$(".tEnf").hide();
 
 function mostrarM(){
     $(".tAnalisis").hide();
     $(".tConsultas").hide();
     $(".tAnalisisp").hide();
+    $(".tEnf").hide();
     $(".tMedicos").show();
 }
 function mostrarT(){
     $(".tAnalisis").hide();
     $(".tMedicos").hide();
     $(".tAnalisisp").hide();
+    $(".tEnf").hide();
     $(".tConsultas").show();
 }
 function mostrarA(){
     $(".tMedicos").hide();
     $(".tConsultas").hide();
     $(".tAnalisisp").hide();
+    $(".tEnf").hide();
     $(".tAnalisis").show();
 }
 function mostrarA(){
     $(".tMedicos").hide();
     $(".tConsultas").hide();
     $(".tAnalisisp").hide();
+    $(".tEnf").hide();
     $(".tAnalisis").show();
 }
 function mostrarAp(){
     $(".tMedicos").hide();
     $(".tConsultas").hide();
     $(".tAnalisis").hide();
+    $(".tEnf").hide();
     $(".tAnalisisp").show();
+}
+function mostrarE(){
+    $(".tMedicos").hide();
+    $(".tConsultas").hide();
+    $(".tAnalisis").hide();
+    $(".tAnalisisp").hide();
+    $(".tEnf").show();
 }
 </script>
 </body>

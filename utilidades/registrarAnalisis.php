@@ -2,15 +2,13 @@
 include 'conection.php';
 $codigo =$_POST["codigoA"];
 $nombre =$_POST["nombreA"];
-$valor =$_POST["valorN"];
 $precio =$_POST["precioA"];
 
 
 $insertar= 'INSERT INTO analisis'
-."(codigoAnalisis, nombre, valorNormal, precio ) 
+."(codigoAnalisis, nombre,  precio ) 
 VALUES ("."'".$codigo."',"
         ."'".$nombre."'," 
-        ."'".$valor. "'," 
         ."'".$precio. "' " 
         .	 ");";
 
