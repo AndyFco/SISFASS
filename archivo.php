@@ -66,7 +66,6 @@ if($user == ''){
          	 	 	
 				<th>Codigo</th>
 				<th>Nombre</th>
-				<th>Valor Normal</th>
 				<th>Precio</th>
 			</tr>
 
@@ -77,11 +76,9 @@ if($user == ''){
           $resultado =$con->query($sql);
 			  	while($ver=$resultado->fetch_assoc()){ 
       ?>
-
 			<tr>
 				<td><?php echo $ver['codigoAnalisis'] ?></td>
 				<td><?php echo $ver['nombre'] ?></td>
-        <td><?php echo $ver['valorNormal'] ?></td>
         <td><?php echo $ver['precio'] ?></td>
       </tr><?php }?>
     </table>
